@@ -1,7 +1,9 @@
 import express from 'express'
 import fetch from 'node-fetch'
+import cors from 'cors'
 
 const app = express()
+app.use(cors())
 const port = 8080
 
 const weatherAPI = {
@@ -21,6 +23,8 @@ app.get('/weather', async (req, res) => {
 
   const { properties: { periods } } = await (await fetch(weatherByPoint.properties.forecast, { method: 'GET' })).json()
 
+
+  // PERIOD: [
   // "number": 1,
   // "name": "This Afternoon",
   // "startTime": "2021-11-13T16:00:00-06:00",
@@ -34,19 +38,27 @@ app.get('/weather', async (req, res) => {
   // "icon": "https://api.weather.gov/icons/land/day/rain,20?size=medium",
   // "shortForecast": "Slight Chance Light Rain",
   // "detailedForecast": "A slight chance of rain after 5pm. Cloudy, with a high near 49. Southwest wind around 5 mph. Chance of precipitation is 20%."
+  // ...
+  //]
 
   const matches = {
-    rain: [/rain/gi, () => { }],
-    sunny: [/sunny/gi, () => { }],
-    snow: [/sunny/gi, () => { }],
-    cloudy: [/cloudy/gi, () => { }],
+    rain: [/rain/gi, () => { return 'rain' }],
+    sunny: [/sunny/gi, () => { return 'sunny' }],
+    snow: [/snow/gi, () => { return 'snow' }],
+    cloudy: [/cloudy/gi, () => { return 'cloudy' }],
   }
 
-  periods.forEach(period => {
+  const notifications = []
 
-  })
+  for (const period of periods) {
+    for (const [regex, func] of Object.values(matches)) {
+      if (regex.test(period.detailedForecast)) {
+        notifications.push({ notificationID: func() })
+      }
+    }
+  }
 
-  res.send(periods)
+  res.send(notifications)
 })
 
 app.post('/force', () => {

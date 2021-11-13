@@ -7,28 +7,26 @@ import Footer from "components/Footers/Footer.js";
 //test
 //console.log(x)
 export default function Index() {
-  const [imagePreview, setImagePreviewPlain] = React.useState('')
-  const setImagePreview = (src) => setImagePreviewPlain(previous => {
+  const [imagePreview, _setImagePreviewPlain] = React.useState('')
+  const setImagePreview = (src) => _setImagePreviewPlain(previous => {
     URL.revokeObjectURL(previous)
     return src
   })
-  const [weather, setWeather] = React.useState('');
+
+  const [weather, setWeather] = React.useState([]);
 
   React.useEffect(() => {
     navigator.geolocation.getCurrentPosition(showPosition);
-  });
-  
-  function showPosition(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    console.log("here");
-    fetch('https://test.loca.lt/weather?lat=39.7456&long=-97.0892')
-    .then(console.log)
-    .then(response => response.json())
-    .then(console.log)
-    .then(data => setWeather(data))
+  }, []);
 
-    console.log(weather);
+  function showPosition(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    console.log("here");
+    fetch(`https://test.loca.lt/weather?lat=${latitude}&long=${longitude}`)
+      .then(response => response.json())
+      .then(data => setWeather(data))
+      .then(console.log(weather))
   }
 
   return (
@@ -40,6 +38,7 @@ export default function Index() {
             <div className="pt-32 sm:pt-0">
               <br />
 
+              {JSON.stringify(weather)}
 
 
               <h2 className="font-semibold text-4xl text-blueGray-600">
@@ -52,6 +51,7 @@ export default function Index() {
                   target="_blank"
                   className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-400 active:bg-blueGray-500 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
+
                   Get started
                 </a>
                 <a
