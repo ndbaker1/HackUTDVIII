@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
-
+//test
 //console.log(x)
 export default function Index() {
   const [imagePreview, setImagePreviewPlain] = React.useState('')
