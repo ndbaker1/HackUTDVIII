@@ -5,13 +5,31 @@ import Link from "next/link";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 
+//console.log(x)
 export default function Index() {
-
   const [imagePreview, setImagePreviewPlain] = React.useState('')
   const setImagePreview = (src) => setImagePreviewPlain(previous => {
     URL.revokeObjectURL(previous)
     return src
   })
+  const [weather, setWeather] = React.useState('');
+
+  React.useEffect(() => {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  });
+  
+  function showPosition(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    console.log("here");
+    fetch('https://test.loca.lt/weather?lat=39.7456&long=-97.0892')
+    .then(console.log)
+    .then(response => response.json())
+    .then(console.log)
+    .then(data => setWeather(data))
+
+    console.log(weather);
+  }
 
   return (
     <>
@@ -20,15 +38,6 @@ export default function Index() {
         <div className="container mx-auto items-center flex flex-wrap">
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
-
-
-              <input type="file" name="image" accept="image/*" capture="camera"
-                onChange={evt => {
-                  const [file] = evt.target.files
-                  if (file) {
-                    setImagePreview(URL.createObjectURL(file))
-                  }
-                }} />
               <br />
 
 
