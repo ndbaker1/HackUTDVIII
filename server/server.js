@@ -50,22 +50,72 @@ app.get('/weather', async (req, res) => {
   //]
 
   const matches = {
-    rain: [/rain/gi, () => { return 'rain' }],
-    sunny: [/sunny/gi, () => { return 'sunny' }],
-    snow: [/snow/gi, () => { return 'snow' }],
-    cloudy: [/cloudy/gi, () => { return 'cloudy' }],
+    rain: [text => /Hail/gi.test(text), () => {
+      const warnings = [
+        'hail warning1',
+        'hail warning2',
+        'hail warning3',
+      ]
+      return warnings[Math.floor(Math.random() * warnings.length)]
+    }],
+    rain: [text => /Flood/gi.test(text), () => {
+      const warnings = [
+        'flood warning1',
+        'flood warning2',
+        'flood warning3',
+      ]
+      return warnings[Math.floor(Math.random() * warnings.length)]
+    }],
+    rain: [text => /Rain/gi.test(text), () => {
+      const warnings = [
+        'rain warning1',
+        'rain warning2',
+        'rain warning3',
+      ]
+      return warnings[Math.floor(Math.random() * warnings.length)]
+    }],
+    sunny: [text => /Sun/gi.test(text), () => {
+      const warnings = [
+        'Humidity is low and temperatures are high, watch out for cracks in your foundation. Watering regularly can help mititage this issue',
+        'sun warning2',
+      ]
+      return warnings[Math.floor(Math.random() * warnings.length)]
+    }],
+    snow: [text => /Snow/gi.test(text), () => {
+      const warnings = [
+        'snow warning1',
+        'snow warning2',
+        'snow warning3',
+      ]
+      return warnings[Math.floor(Math.random() * warnings.length)]
+    }],
   }
 
   const notifications = []
 
   for (const period of periods) {
-    for (const [regex, func] of Object.values(matches)) {
-      if (regex.test(period.detailedForecast)) {
+    for (const [key, [check, func]] of Object.entries(matches)) {
+      if (check(period.detailedForecast)) {
         notifications.push({
-          timestamp: Date.now() - Math.round(Math.random() * REQUEST_INTERVAL_MILLISECONDS),
-          notificationID: func(),
+          timestamp: period.startTime,
+          notificationID: key.toUpperCase(),
+          message: func(),
+          temperature: period.temperature + period.temperatureUnit,
         })
       }
+    }
+  }
+
+  //// TEM PTHNFSDFSDhjfuijds bh
+  for (const [key, message, temp] of temps) {
+    if (Math.random() < 0.6) {
+      const tempNotify = notifications[Math.floor(Math.random() * notifications.length)]
+      notifications.push({
+        timestamp: tempNotify.timestamp,
+        notificationID: key.toUpperCase(),
+        message: message,
+        temperature: temp,
+      })
     }
   }
 
@@ -76,15 +126,8 @@ app.listen(port, () => {
   console.log('Starting!');
 })
 
-const forceTypes = {
-  hail: [
-    {
-
-    }
-  ],
-  tornado: [
-    {
-
-    }
-  ],
-}
+const temps = [
+  ['tornado', 'torando warning1', '66F'],
+  ['hurricane', 'hurricane warning1', '69F'],
+  ['icy roads', 'icy roads warning1', '29F'],
+]

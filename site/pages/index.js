@@ -20,6 +20,10 @@ export default function Index() {
                 The best neighbor
               </p>
 
+              <h2 className="font-semibold text-4xl text-blueGray-600">
+                <a href="/"> WhethR </a>
+              </h2>
+
               <div className="mt-12">
                 <a
                   href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/overview/notus?ref=nnjs-index"
