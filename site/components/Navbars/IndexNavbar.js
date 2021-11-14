@@ -37,18 +37,6 @@ export default function Navbar(props) {
           >
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
               <li className="flex items-center">
-                <Link href="/landing">
-                  <a
-                    href="#pablo"
-                    className={
-                      "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-                    }
-                  >
-                    Near you
-                  </a>
-                </Link>
-              </li>
-              <li className="flex items-center">
                 <Link href="/weather">
                   <a
                     href="#pablo"
@@ -56,7 +44,7 @@ export default function Navbar(props) {
                       "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
                     }
                   >
-                    Weather
+                    Live Updates
                   </a>
                 </Link>
               </li>
