@@ -4,14 +4,30 @@ import Link from "next/link";
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
-
+//test
+//console.log(x)
 export default function Index() {
-
-  const [imagePreview, setImagePreviewPlain] = React.useState('')
-  const setImagePreview = (src) => setImagePreviewPlain(previous => {
+  const [imagePreview, _setImagePreviewPlain] = React.useState('')
+  const setImagePreview = (src) => _setImagePreviewPlain(previous => {
     URL.revokeObjectURL(previous)
     return src
   })
+
+  const [weather, setWeather] = React.useState([]);
+
+  React.useEffect(() => {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  }, []);
+
+  function showPosition(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    console.log("here");
+    fetch(`https://test.loca.lt/weather?lat=${latitude}&long=${longitude}`)
+      .then(response => response.json())
+      .then(data => setWeather(data))
+      .then(console.log(weather))
+  }
 
   return (
     <>
@@ -30,6 +46,8 @@ export default function Index() {
                   }
                 }} />
               <br /> */}
+
+              {JSON.stringify(weather)}
 
                       <p className="mb-4 text-blueGray-500">
                         The best neighbor

@@ -73,7 +73,7 @@ export default class MyApp extends App {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           <title>{vars.webTitle}</title>
-          <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQyS8QpRZdCr31a6EjLgFTbgCAIrj0N6k"></script>
         </Head>
         <Layout>
           <Component {...pageProps} />
