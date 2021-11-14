@@ -50,10 +50,46 @@ app.get('/weather', async (req, res) => {
   //]
 
   const matches = {
-    rain: [/rain/gi, () => { return 'rain' }],
-    sunny: [/sunny/gi, () => { return 'sunny' }],
-    snow: [/snow/gi, () => { return 'snow' }],
-    cloudy: [/cloudy/gi, () => { return 'cloudy' }],
+    rain: [/hail/gi, () => {
+      const warnings = [
+        'hail warning1',
+        'hail warning2',
+        'hail warning3',
+      ]
+      return warnings[Math.floor(Math.random() * warnings.length)]
+    }],
+    rain: [/flood/gi, () => {
+      const warnings = [
+        'flood warning1',
+        'flood warning2',
+        'flood warning3',
+      ]
+      return warnings[Math.floor(Math.random() * warnings.length)]
+    }],
+    rain: [/rain/gi, () => {
+      const warnings = [
+        'rain warning1',
+        'rain warning2',
+        'rain warning3',
+      ]
+      return warnings[Math.floor(Math.random() * warnings.length)]
+    }],
+    sunny: [/sun/gi, () => {
+      const warnings = [
+        'sun warning1',
+        'sun warning2',
+        'sun warning3',
+      ]
+      return warnings[Math.floor(Math.random() * warnings.length)]
+    }],
+    snow: [/snow/gi, () => {
+      const warnings = [
+        'snow warning1',
+        'snow warning2',
+        'snow warning3',
+      ]
+      return warnings[Math.floor(Math.random() * warnings.length)]
+    }],
   }
 
   const notifications = []
@@ -64,6 +100,7 @@ app.get('/weather', async (req, res) => {
         notifications.push({
           timestamp: Date.now() - Math.round(Math.random() * REQUEST_INTERVAL_MILLISECONDS),
           notificationID: func(),
+          temperature: period.temperature + period.temperatureUnit,
         })
       }
     }
@@ -75,16 +112,3 @@ app.get('/weather', async (req, res) => {
 app.listen(port, () => {
   console.log('Starting!');
 })
-
-const forceTypes = {
-  hail: [
-    {
-
-    }
-  ],
-  tornado: [
-    {
-
-    }
-  ],
-}

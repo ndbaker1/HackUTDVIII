@@ -1,11 +1,10 @@
 import React from "react";
-import Link from "next/link";
-
-// components
 
 import Navbar from "components/Navbars/IndexNavbar";
 import Footer from "components/Footers/Footer.js";
 import MapExample from "components/Maps/MapExample.js";
+
+import { vars } from '../vars'
 
 const weatherURL = 'http://localhost:8080/weather' || 'https://test.loca.lt/weather'
 
@@ -52,12 +51,11 @@ export default function Landing() {
                 <div className="pr-12">
 
                   <h1 className="text-white font-semibold text-5xl">
-                    Weather near you
+                    Weather Near You
                   </h1>
                   <p className="mt-4 text-lg text-blueGray-200">
-                    This is a simple example of a Landing Page you can build
-                    using Notus NextJS. It features multiple CSS components
-                    based on the Tailwind CSS design system.
+                    <i>{vars.appTitle}</i> provides <b>live</b> updates to your area about weather changes that could become
+                    a liability to your safety and property. Don't forget to
                   </p>
                 </div>
               </div>
@@ -139,23 +137,23 @@ export default function Landing() {
                   <i className="fas fa-user-friends text-xl"></i>
                 </div>
                 <h3 className="text-2xl mb-2 font-semibold leading-normal">
-                  Notifications
+                  Announcements 📣
                 </h3>
 
 
-                <div className="container mx-auto items-center grid grid-rows1" style={{ maxHeight: '25em', overflow: 'auto' }}>
-                  {weather.map(notif => (
-                    <div className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-400 active:bg-blueGray-500 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150">
-                      {notif.notificationID}
-                    </div>
-                  ))}
+                <div className="container mx-auto items-center grid grid-rows1 h-600-px" style={{ overflow: 'auto' }}>
+                  {weather
+                    .sort((a, b) => a.timestamp < b.timestamp)
+                    .map(notif => (
+                      <div className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-400 active:bg-blueGray-500 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150">
+                        <div className="flex justify-between">
+                          <h2> {notif.notificationID} </h2>
+                          <p style={{ textAlign: 'left' }}> {notif.temperature}°</p>
+                        </div>
+                        <p style={{ fontSize: "0.7rem", textAlign: 'right' }}> {new Date(notif.timestamp).toUTCString()} </p>
+                      </div>
+                    ))}
                 </div>
-
-                <Link href="/">
-                  <a href="#pablo" className="font-bold text-blueGray-700 mt-8">
-                    Updates in your Area!
-                  </a>
-                </Link>
               </div>
 
               <div className="w-full md:w-8/12 px-4 mr-auto ml-auto">
