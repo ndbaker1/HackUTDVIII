@@ -4,6 +4,8 @@ import Navbar from "components/Navbars/IndexNavbar";
 import Footer from "components/Footers/Footer.js";
 import MapExample from "components/Maps/MapExample.js";
 
+import OpenWeatherMap from 'openweathermap-ts';
+
 import { vars } from '../vars'
 
 const weatherURL = 'http://localhost:8080/weather' || 'https://test.loca.lt/weather'
@@ -12,10 +14,30 @@ const weatherURL = 'http://localhost:8080/weather' || 'https://test.loca.lt/weat
 export default function Landing() {
 
   const [weather, setWeather] = React.useState([]);
-
+  const [temp, setTemp] = React.useState([]); 
+  const [min, setmin] = React.useState([]); 
+  const [max, setmax] = React.useState([]); 
   React.useEffect(() => {
     navigator.geolocation.getCurrentPosition(showPosition);
+    gettemp(); 
   }, []);
+  
+  function gettemp(){
+    const openWeather = new OpenWeatherMap({
+      apiKey: 'cef2ac7ef2445f3bbfcf45109582bbce'
+    });
+    openWeather
+    .getCurrentWeatherByCityName({
+      cityName: 'Richardson'
+    })
+    .then((weather) =>{
+      console.log(weather);
+      setTemp(weather.main.temp);
+      setmax(weather.main.temp_max);
+      setmin(weather.main.temp_min);
+    }
+    );
+  }
 
   function showPosition(position) {
     const latitude = position.coords.latitude;
@@ -106,10 +128,10 @@ export default function Landing() {
                     <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400">
                       <i className="fas fa-retweet"></i>
                     </div>
-                    <h6 className="text-xl font-semibold">Free Revisions</h6>
+                    <h6 className="text-xl font-semibold">{temp}°F </h6>
                     <p className="mt-2 mb-4 text-blueGray-500">
-                      Keep you user engaged by providing meaningful information.
-                      Remember that by this time, the user is curious.
+                      High for today: {max}°F <br/>
+                      Low for today: {min}°F
                     </p>
                   </div>
                 </div>
