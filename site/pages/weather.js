@@ -74,7 +74,7 @@ export default function Landing() {
                   <h1 className="text-white font-semibold text-5xl">
                     Weather Near You
                   </h1>
-                  <p className="mt-4 text-lg text-blueGray-200">
+                  <p className="mt-10 text-lg text-blueGray-200">
                     <i>{vars.appTitle}</i> provides <b>live</b> updates to your area about weather changes that could become
                     a liability to your safety and property
                   </p>
