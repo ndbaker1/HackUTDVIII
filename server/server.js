@@ -52,40 +52,32 @@ app.get('/weather', async (req, res) => {
   const matches = {
     rain: [text => /Hail/gi.test(text), () => {
       const warnings = [
-        'hail warning1',
-        'hail warning2',
-        'hail warning3',
+        'Quarter size hail, move vehicles under cover and monitor machinery around the perimeter of the house',
       ]
       return warnings[Math.floor(Math.random() * warnings.length)]
     }],
     rain: [text => /Flood/gi.test(text), () => {
       const warnings = [
-        'flood warning1',
-        'flood warning2',
-        'flood warning3',
+        'Area in danger of floods, do not stay indoors and try to get to the highest point possible',
       ]
       return warnings[Math.floor(Math.random() * warnings.length)]
     }],
     rain: [text => /Rain/gi.test(text), () => {
       const warnings = [
-        'rain warning1',
-        'rain warning2',
-        'rain warning3',
+        'Heavy rain and gusts in the area. Move belongings in doors if they may be washed or swept away',
+        'High amounts of rain preceeding a storm, cover plants and ',
       ]
       return warnings[Math.floor(Math.random() * warnings.length)]
     }],
     sunny: [text => /Sun/gi.test(text), () => {
       const warnings = [
         'Humidity is low and temperatures are high, watch out for cracks in your foundation. Watering regularly can help mititage this issue',
-        'sun warning2',
       ]
       return warnings[Math.floor(Math.random() * warnings.length)]
     }],
     snow: [text => /Snow/gi.test(text), () => {
       const warnings = [
-        'snow warning1',
-        'snow warning2',
-        'snow warning3',
+        'Watch for pipes and faucets freezing around the perimeter of the property',
       ]
       return warnings[Math.floor(Math.random() * warnings.length)]
     }],
@@ -127,7 +119,7 @@ app.listen(port, () => {
 })
 
 const temps = [
-  ['tornado', 'torando warning1', '66F'],
-  ['hurricane', 'hurricane warning1', '69F'],
-  ['icy roads', 'icy roads warning1', '29F'],
+  ['tornado', 'Move stay objects inside in order to avoid projectiles if tornado is within your property\'s vicinity', '66F'],
+  ['hurricane', 'Move stay objects inside in order to avoid projectiles if hurricane is within your property\'s vicinity', '66F'],
+  ['icy roads', 'Do not try to drive or move vehicles on icy roads', '29F'],
 ]
