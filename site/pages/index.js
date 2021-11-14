@@ -16,24 +16,23 @@ export default function Index() {
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
 
-              <p className="mb-4 text-blueGray-500">
-                The best neighbor
-              </p>
-
               <h2 className="font-semibold text-4xl text-blueGray-600">
                 <a href="/"> WhethR </a>
               </h2>
 
-              <div className="mt-12">
+              <p className="mt-2 text-blueGray-500">
+                The best neighbor
+              </p>
+
+              <div className="mt-8">
                 <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/overview/notus?ref=nnjs-index"
-                  target="_blank"
+                  href="/weather"
                   className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-400 active:bg-blueGray-500 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
                   See Current Weather
                 </a>
                 <a
-                  href="https://github.com/creativetimofficial/notus-nextjs?ref=nnjs-index"
+                  href="https://www.statefarm.com/claims"
                   className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
                   target="_blank"
                 >

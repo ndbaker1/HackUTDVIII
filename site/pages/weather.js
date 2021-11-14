@@ -170,12 +170,11 @@ export default function Landing() {
                   <blockquote className="relative p-5 mb-2">
 
                     <h4 className="text-xl font-bold text-white">
-                      Top Notch Services
+                      Find Nearby Shelter Areas
                     </h4>
                     <p className="text-s font-light mt-2 text-white">
-                      The Arctic Ocean freezes every winter and much of the
-                      sea-ice then thaws every summer, and that process will
-                      continue whatever happens.
+                      If there is an approaching disaster near you, you may  
+                      seek nearby shelter by using this map.
                     </p>
                   </blockquote>
                 </div>
