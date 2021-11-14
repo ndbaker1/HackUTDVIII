@@ -4,30 +4,9 @@ import Link from "next/link";
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
-//test
-//console.log(x)
+
+
 export default function Index() {
-  const [imagePreview, _setImagePreviewPlain] = React.useState('')
-  const setImagePreview = (src) => _setImagePreviewPlain(previous => {
-    URL.revokeObjectURL(previous)
-    return src
-  })
-
-  const [weather, setWeather] = React.useState([]);
-
-  React.useEffect(() => {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  }, []);
-
-  function showPosition(position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    console.log("here");
-    fetch(`https://test.loca.lt/weather?lat=${latitude}&long=${longitude}`)
-      .then(response => response.json())
-      .then(data => setWeather(data))
-      .then(console.log(weather))
-  }
 
   return (
     <>
@@ -37,13 +16,6 @@ export default function Index() {
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
               <br />
-
-              {JSON.stringify(weather)}
-
-
-              <h2 className="font-semibold text-4xl text-blueGray-600">
-                <a href={imagePreview}> View Image </a>
-              </h2>
 
               <div className="mt-12">
                 <a

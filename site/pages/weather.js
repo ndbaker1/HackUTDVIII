@@ -7,7 +7,28 @@ import Navbar from "components/Navbars/IndexNavbar";
 import Footer from "components/Footers/Footer.js";
 import MapExample from "components/Maps/MapExample.js";
 
+const weatherURL = 'http://localhost:8080/weather' || 'https://test.loca.lt/weather'
+
+
 export default function Landing() {
+
+  const [weather, setWeather] = React.useState([]);
+
+  React.useEffect(() => {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  }, []);
+
+  function showPosition(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    console.log("here");
+    fetch(`${weatherURL}?lat=${latitude}&long=${longitude}`)
+      .then(response => response.json())
+      .then(data => setWeather(data))
+      .then(console.log(weather))
+  }
+
+
   return (
     <>
       <Navbar transparent />
@@ -118,8 +139,17 @@ export default function Landing() {
                   <i className="fas fa-user-friends text-xl"></i>
                 </div>
                 <h3 className="text-2xl mb-2 font-semibold leading-normal">
-                  Working with us is a pleasure
+                  Notifications
                 </h3>
+
+
+                <div className="container mx-auto items-center grid grid-rows1" style={{ maxHeight: '20rem', overflow: 'auto' }}>
+                  {weather.map(notif => (
+                    <div className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-400 active:bg-blueGray-500 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150">
+                      {notif.notificationID}
+                    </div>
+                  ))}
+                </div>
                 <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
                   Don't let your uses guess by attaching tooltips and popoves to
                   any element. Just make sure you enable them first via
@@ -133,7 +163,7 @@ export default function Landing() {
                 </p>
                 <Link href="/">
                   <a href="#pablo" className="font-bold text-blueGray-700 mt-8">
-                    Check Notus NextJS!
+                    Updates in your Area
                   </a>
                 </Link>
               </div>
