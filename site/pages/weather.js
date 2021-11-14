@@ -145,11 +145,13 @@ export default function Landing() {
                   {weather
                     .sort((a, b) => a.timestamp < b.timestamp)
                     .map(notif => (
-                      <div className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-400 active:bg-blueGray-500 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150">
+                      <div className="text-white my-4 px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-400 active:bg-blueGray-500 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150">
                         <div className="flex justify-between">
-                          <h2> {notif.notificationID} </h2>
+                          <h2 className="font-bold"> {notif.notificationID} </h2>
                           <p style={{ textAlign: 'left' }}> {notif.temperature}°</p>
                         </div>
+                        <hr />
+                        <p> {notif.message} </p>
                         <p style={{ fontSize: "0.7rem", textAlign: 'right' }}> For {new Date(notif.timestamp).toUTCString()} </p>
                       </div>
                     ))}

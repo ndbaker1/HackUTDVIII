@@ -50,7 +50,7 @@ app.get('/weather', async (req, res) => {
   //]
 
   const matches = {
-    rain: [/hail/gi, () => {
+    rain: [text => /Hail/gi.test(text), () => {
       const warnings = [
         'hail warning1',
         'hail warning2',
@@ -58,7 +58,7 @@ app.get('/weather', async (req, res) => {
       ]
       return warnings[Math.floor(Math.random() * warnings.length)]
     }],
-    rain: [/flood/gi, () => {
+    rain: [text => /Flood/gi.test(text), () => {
       const warnings = [
         'flood warning1',
         'flood warning2',
@@ -66,7 +66,7 @@ app.get('/weather', async (req, res) => {
       ]
       return warnings[Math.floor(Math.random() * warnings.length)]
     }],
-    rain: [/rain/gi, () => {
+    rain: [text => /Rain/gi.test(text), () => {
       const warnings = [
         'rain warning1',
         'rain warning2',
@@ -74,15 +74,14 @@ app.get('/weather', async (req, res) => {
       ]
       return warnings[Math.floor(Math.random() * warnings.length)]
     }],
-    sunny: [/sun/gi, () => {
+    sunny: [text => /Sun/gi.test(text), () => {
       const warnings = [
-        'sun warning1',
+        'Humidity is low and temperatures are high, watch out for cracks in your foundation. Watering regularly can help mititage this issue',
         'sun warning2',
-        'sun warning3',
       ]
       return warnings[Math.floor(Math.random() * warnings.length)]
     }],
-    snow: [/snow/gi, () => {
+    snow: [text => /Snow/gi.test(text), () => {
       const warnings = [
         'snow warning1',
         'snow warning2',
@@ -95,11 +94,12 @@ app.get('/weather', async (req, res) => {
   const notifications = []
 
   for (const period of periods) {
-    for (const [regex, func] of Object.values(matches)) {
-      if (regex.test(period.detailedForecast)) {
+    for (const [key, [check, func]] of Object.entries(matches)) {
+      if (check(period.detailedForecast)) {
         notifications.push({
           timestamp: period.startTime,
-          notificationID: func(),
+          notificationID: key.toUpperCase(),
+          message: func(),
           temperature: period.temperature + period.temperatureUnit,
         })
       }
