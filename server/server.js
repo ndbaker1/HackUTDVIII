@@ -2,6 +2,10 @@ import express from 'express'
 import fetch from 'node-fetch'
 import cors from 'cors'
 
+console.log(Date.now())
+const REQUEST_INTERVAL_MILLISECONDS = 5 * 60 * 1000
+
+
 const app = express()
 app.use(cors())
 const port = 8080
@@ -11,10 +15,15 @@ const weatherAPI = {
   points: 'https://api.weather.gov/points/',
 }
 
+
 app.get('/weather', async (req, res) => {
 
   console.log('[INFO] query params : ', req.query)
-  const { lat, long } = req.query
+  const { lat, long, forceType } = req.query
+
+  if (forceType) {
+    return JSON.stringify(forceTypes(forceType))
+  }
 
   console.log('[INFO] request to : ', weatherAPI.points + lat + ',' + long)
   const weatherByPoint = await (await fetch(weatherAPI.points + lat + ',' + long, { method: 'GET' })).json()
@@ -22,7 +31,6 @@ app.get('/weather', async (req, res) => {
   console.log('[INFO] weather by lat,long : ', weatherByPoint)
 
   const { properties: { periods } } = await (await fetch(weatherByPoint.properties.forecast, { method: 'GET' })).json()
-
 
   // PERIOD: [
   // "number": 1,
@@ -53,7 +61,10 @@ app.get('/weather', async (req, res) => {
   for (const period of periods) {
     for (const [regex, func] of Object.values(matches)) {
       if (regex.test(period.detailedForecast)) {
-        notifications.push({ notificationID: func() })
+        notifications.push({
+          timestamp: Date.now() - Math.round(Math.random() * REQUEST_INTERVAL_MILLISECONDS),
+          notificationID: func(),
+        })
       }
     }
   }
@@ -61,10 +72,19 @@ app.get('/weather', async (req, res) => {
   res.send(notifications)
 })
 
-app.post('/force', () => {
-
-})
-
 app.listen(port, () => {
   console.log('Starting!');
 })
+
+const forceTypes = {
+  hail: [
+    {
+
+    }
+  ],
+  tornado: [
+    {
+
+    }
+  ],
+}
