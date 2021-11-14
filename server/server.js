@@ -106,9 +106,28 @@ app.get('/weather', async (req, res) => {
     }
   }
 
+  //// TEM PTHNFSDFSDhjfuijds bh
+  for (const [key, message, temp] of temps) {
+    if (Math.random() < 0.6) {
+      const tempNotify = notifications[Math.floor(Math.random() * notifications.length)]
+      notifications.push({
+        timestamp: tempNotify.timestamp,
+        notificationID: key.toUpperCase(),
+        message: message,
+        temperature: temp,
+      })
+    }
+  }
+
   res.send(notifications)
 })
 
 app.listen(port, () => {
   console.log('Starting!');
 })
+
+const temps = [
+  ['tornado', 'torando warning1', '66F'],
+  ['hurricane', 'hurricane warning1', '69F'],
+  ['icy roads', 'icy roads warning1', '29F'],
+]

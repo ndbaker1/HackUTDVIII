@@ -55,7 +55,7 @@ export default function Landing() {
                   </h1>
                   <p className="mt-4 text-lg text-blueGray-200">
                     <i>{vars.appTitle}</i> provides <b>live</b> updates to your area about weather changes that could become
-                    a liability to your safety and property. Don't forget to
+                    a liability to your safety and property
                   </p>
                 </div>
               </div>
@@ -143,7 +143,7 @@ export default function Landing() {
 
                 <div className="container mx-auto items-center grid grid-rows1 h-600-px" style={{ overflow: 'auto' }}>
                   {weather
-                    .sort((a, b) => a.timestamp < b.timestamp)
+                    .sort((a, b) => a.timestamp < b.timestamp ? 1 : -1)
                     .map(notif => (
                       <div className="text-white my-4 px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-400 active:bg-blueGray-500 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150">
                         <div className="flex justify-between">
