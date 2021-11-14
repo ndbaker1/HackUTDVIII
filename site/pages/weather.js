@@ -77,7 +77,7 @@ export default function Landing() {
                   </h1>
                   <p className="mt-4 text-lg text-blueGray-200">
                     <i>{vars.appTitle}</i> provides <b>live</b> updates to your area about weather changes that could become
-                    a liability to your safety and property. Don't forget to
+                    a liability to your safety and property
                   </p>
                 </div>
               </div>
@@ -106,25 +106,11 @@ export default function Landing() {
 
         <section className="pb-20 bg-blueGray-200 -mt-24">
           <div className="container mx-auto px-4">
-            <div className="flex flex-wrap">
-              <div className="lg:pt-12 pt-6 w-full md:w-4/12 px-4 text-center">
-                <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
-                  <div className="px-4 py-5 flex-auto">
-                    <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
-                      <i className="fas fa-award"></i>
-                    </div>
-                    <h6 className="text-xl font-semibold">Awarded Agency</h6>
-                    <p className="mt-2 mb-4 text-blueGray-500">
-                      Divide details about your product or agency work into
-                      parts. A paragraph describing a feature will be enough.
-                    </p>
-                  </div>
-                </div>
-              </div>
+            <div className="flex justify-center">
 
-              <div className="w-full md:w-4/12 px-4 text-center">
+              <div className="px-4 text-center">
                 <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
-                  <div className="px-4 py-5 flex-auto">
+                  <div className="px-12 py-5 flex-auto">
                     <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400">
                       <i className="fas fa-retweet"></i>
                     </div>
@@ -143,10 +129,9 @@ export default function Landing() {
                     <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-400">
                       <i className="fas fa-fingerprint"></i>
                     </div>
-                    <h6 className="text-xl font-semibold">Verified Company</h6>
+                    <h6 className="text-xl font-semibold uppercase"> Announcements </h6>
                     <p className="mt-2 mb-4 text-blueGray-500">
-                      Write a few lines about each one. A paragraph describing a
-                      feature will be enough. Keep you user engaged!
+                      Check routinely for updates and how you can preserve your property and belongings
                     </p>
                   </div>
                 </div>
@@ -155,24 +140,25 @@ export default function Landing() {
 
             <div className="flex flex-wrap items-center mt-32">
               <div className="w-full md:w-4/12 px-4 mr-auto ml-auto">
-                <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-                  <i className="fas fa-user-friends text-xl"></i>
+                <div className="flex justify-around">
+                  <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
+                    <i className="fas fa-user-friends text-xl"></i>
+                  </div>
                 </div>
-                <h3 className="text-2xl mb-2 font-semibold leading-normal">
-                  Announcements 📣
-                </h3>
 
 
                 <div className="container mx-auto items-center grid grid-rows1 h-600-px" style={{ overflow: 'auto' }}>
                   {weather
-                    .sort((a, b) => a.timestamp < b.timestamp)
+                    .sort((a, b) => a.timestamp < b.timestamp ? 1 : -1)
                     .map(notif => (
-                      <div className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-400 active:bg-blueGray-500 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150">
+                      <div className="text-white my-4 px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-400 active:bg-blueGray-500 text-sm shadow hover:shadow-lg ease-linear transition-all duration-150">
                         <div className="flex justify-between">
-                          <h2> {notif.notificationID} </h2>
+                          <h2 className="font-bold"> {notif.notificationID} </h2>
                           <p style={{ textAlign: 'left' }}> {notif.temperature}°</p>
                         </div>
-                        <p style={{ fontSize: "0.7rem", textAlign: 'right' }}> {new Date(notif.timestamp).toUTCString()} </p>
+                        <hr />
+                        <p> {notif.message} </p>
+                        <p style={{ fontSize: "0.7rem", textAlign: 'right' }}> For {new Date(notif.timestamp).toUTCString()} </p>
                       </div>
                     ))}
                 </div>

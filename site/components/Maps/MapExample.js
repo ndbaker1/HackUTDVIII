@@ -71,30 +71,25 @@ function MapExample() {
 
     map = new google.maps.Map(map, mapOptions);
 
-    const marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      //animation: google.maps.Animation.DROP,
-      title: "Alt Location",
-    });
+    const svgMarker = {
+      path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+      fillColor: "blue",
+      fillOpacity: 0.6,
+      strokeWeight: 0,
+      rotation: 0,
+      scale: 2,
+      anchor: new google.maps.Point(15, 30),
+    };
 
     const currmarker = new google.maps.Marker({
       position: myLatlng,
       map: map,
-      //animation: google.maps.Animation.DROP,
+      icon: svgMarker,
       title: "Current Location",
     });
 
-    const shelterMarker = new google.maps.Marker({
-      position: shelterLatlng,
-      map: map,
-      title: "Hello World!",
-    });
-
     const contentString =
-      '<div class="info-window-content"><h2>Current Location</h2><div>'; //+
-      //"<p>A free Admin for Tailwind CSS, React, React Hooks, and NextJS.</p></div>";
-
+      '<div class="info-window-content"><h2>Current Location</h2><div>';
     const infowindow = new google.maps.InfoWindow({
       content: contentString,
     });
@@ -104,7 +99,7 @@ function MapExample() {
     //   infowindow.open(map, shelterMarker);
     // });
 
-    infowindow.open(map, shelterMarker);
+    // infowindow.open(map, shelterMarker);
 
     console.log(navigator.geolocation);
 
@@ -134,55 +129,35 @@ function MapExample() {
       handleLocationError(false, infowindow, map.getCenter());
     }
 
-    // const iconBase =
-    // "https://developers.google.com/maps/documentation/javascript/examples/full/images/";
-    // const icons = {
-    //   parking: {
-    //     icon: iconBase + "parking_lot_maps.png",
-    //   },
-    //   library: {
-    //     icon: iconBase + "library_maps.png",
-    //   },
-    //   info: {
-    //     icon: iconBase + "info-i_maps.png",
-    //   },
-    // };
-
     const features = [
       {
         position: new google.maps.LatLng(32.879510, -96.889190),
-        label: "Tornado Shelter Co. Of Dallas"
-        // type: "info",
+        label: "Tornado Shelter Co. Of Dallas",
       },
       {
         position: new google.maps.LatLng(32.884630, -96.676320),
         label: "Storm Dorms Tornado Shelters",
-        // type: "info",
       },
-      // {
-      //   position: new google.maps.LatLng(-33.91747, 151.22912),
-      //   // type: "info",
-      // },
-      // {
-      //   position: new google.maps.LatLng(-33.9191, 151.22907),
-      //   // type: "info",
-      // },
-      // {
-      //   position: new google.maps.LatLng(-33.919543720969806, 151.23112279762267),
-      //   //type: "parking",
-      // },
-      // {
-      //   position: new google.maps.LatLng(-33.91608037421864, 151.23288232673644),
-      //   //type: "parking",
-      // },
-      // {
-      //   position: new google.maps.LatLng(-33.91851096391805, 151.2344058214569),
-      //   //type: "parking",
-      // },
+      {
+        position: new google.maps.LatLng(32.909900, -96.448850,),
+        label: "FamilySAFE of Texas Tornado Shelters",
+      },
+      {
+        position: new google.maps.LatLng(32.830780, -96.838460),
+        label: "ArmourGuard Storm Shelters and Saferooms",
+      },
+      {
+        position: new google.maps.LatLng(32.730560, -97.163770),
+        label: "Safe Shelters Direct",
+      },
+      {
+        position: new google.maps.LatLng(32.822300, -96.865750),
+        label: "Great American Storm Shelters"
+      },
       // {
       //   position: new google.maps.LatLng(-33.91818154739766, 151.2346203981781),
       //   //type: "parking",
-      // },
+      // }
       // {
       //   position: new google.maps.LatLng(-33.91727341958453, 151.23348314155578),
       //   //type: "library",
@@ -191,11 +166,19 @@ function MapExample() {
   
     // Create markers.
     for (let i = 0; i < features.length; i++) {
-      const marker2 = new google.maps.Marker({
+      const marker = new google.maps.Marker({
         position: features[i].position,
-        label: features[i].label,
+        //label: features[i].label,
         //icon: icons[features[i].type].icon,
         map: map,
+      });
+
+      const infowindowLabel = new google.maps.InfoWindow({
+        content: features[i].label,
+      });
+
+      marker.addListener('click', function() {
+        infowindowLabel.open(map, marker);
       });
     }
 
