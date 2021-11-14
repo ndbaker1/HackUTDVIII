@@ -98,7 +98,7 @@ app.get('/weather', async (req, res) => {
     for (const [regex, func] of Object.values(matches)) {
       if (regex.test(period.detailedForecast)) {
         notifications.push({
-          timestamp: Date.now() - Math.round(Math.random() * REQUEST_INTERVAL_MILLISECONDS),
+          timestamp: period.startTime,
           notificationID: func(),
           temperature: period.temperature + period.temperatureUnit,
         })

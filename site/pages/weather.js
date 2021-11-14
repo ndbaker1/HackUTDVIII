@@ -150,7 +150,7 @@ export default function Landing() {
                           <h2> {notif.notificationID} </h2>
                           <p style={{ textAlign: 'left' }}> {notif.temperature}°</p>
                         </div>
-                        <p style={{ fontSize: "0.7rem", textAlign: 'right' }}> {new Date(notif.timestamp).toUTCString()} </p>
+                        <p style={{ fontSize: "0.7rem", textAlign: 'right' }}> For {new Date(notif.timestamp).toUTCString()} </p>
                       </div>
                     ))}
                 </div>
