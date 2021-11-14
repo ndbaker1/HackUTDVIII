@@ -13,18 +13,20 @@ export default function Index() {
       <IndexNavbar fixed />
       <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
         <div className="container mx-auto items-center flex flex-wrap">
-          <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
-            <div className="pt-32 sm:pt-0">
+          <div className="flex flex-col flex-wrap w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
+            <div className="top-0 w-full h-full bg-center bg-cover" style={{  backgroundImage: 'url(img/cloud_circle.png)', width: '8rem', height: '8rem' }}>
+            </div>
+            <div className="sm:pt-0">
 
               <h2 className="font-semibold text-4xl text-blueGray-600">
                 <a href="/"> WhethR </a>
               </h2>
 
               <p className="mt-2 text-blueGray-500">
-                The best neighbor
+                WhethR or not, we are there.
               </p>
 
-              <div className="mt-8">
+              <div className="flex flex-row mt-8">
                 <a
                   href="/weather"
                   className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-400 active:bg-blueGray-500 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
@@ -46,6 +48,7 @@ export default function Index() {
           className="absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860-px"
           src="/img/pattern_nextjs.png"
           alt="..."
+          style={{ zIndex: '-1' }}
         />
       </section>
 
