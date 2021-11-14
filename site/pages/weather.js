@@ -14,29 +14,29 @@ const weatherURL = 'http://localhost:8080/weather' || 'https://test.loca.lt/weat
 export default function Landing() {
 
   const [weather, setWeather] = React.useState([]);
-  const [temp, setTemp] = React.useState([]); 
-  const [min, setmin] = React.useState([]); 
-  const [max, setmax] = React.useState([]); 
+  const [temp, setTemp] = React.useState([]);
+  const [min, setmin] = React.useState([]);
+  const [max, setmax] = React.useState([]);
   React.useEffect(() => {
     navigator.geolocation.getCurrentPosition(showPosition);
-    gettemp(); 
+    gettemp();
   }, []);
-  
-  function gettemp(){
+
+  function gettemp() {
     const openWeather = new OpenWeatherMap({
       apiKey: 'cef2ac7ef2445f3bbfcf45109582bbce'
     });
     openWeather
-    .getCurrentWeatherByCityName({
-      cityName: 'Richardson'
-    })
-    .then((weather) =>{
-      console.log(weather);
-      setTemp(weather.main.temp);
-      setmax(weather.main.temp_max);
-      setmin(weather.main.temp_min);
-    }
-    );
+      .getCurrentWeatherByCityName({
+        cityName: 'Richardson'
+      })
+      .then((weather) => {
+        console.log(weather);
+        setTemp(weather.main.temp);
+        setmax(weather.main.temp_max);
+        setmin(weather.main.temp_min);
+      }
+      );
   }
 
   function showPosition(position) {
@@ -105,22 +105,8 @@ export default function Landing() {
 
         <section className="pb-20 bg-blueGray-200 -mt-24">
           <div className="container mx-auto px-4">
-            <div className="flex justify-center">
+            <div className="flex flex-wrap justify-center">
 
-              <div className="px-4 text-center">
-                <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
-                  <div className="px-12 py-5 flex-auto">
-                    <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400">
-                      <i className="fas fa-retweet"></i>
-                    </div>
-                    <h6 className="text-xl font-semibold">{temp}°F </h6>
-                    <p className="mt-2 mb-4 text-blueGray-500">
-                      High for today: {max}°F <br/>
-                      Low for today: {min}°F
-                    </p>
-                  </div>
-                </div>
-              </div>
 
               <div className="pt-6 w-full md:w-4/12 px-4 text-center">
                 <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
@@ -131,6 +117,21 @@ export default function Landing() {
                     <h6 className="text-xl font-semibold uppercase"> Announcements </h6>
                     <p className="mt-2 mb-4 text-blueGray-500">
                       Check routinely for updates and how you can preserve your property and belongings
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-6 w-full md:w-4/12 px-4 text-center">
+                <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg">
+                  <div className="px-4 py-5 flex-auto">
+                    <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400">
+                      <i className="fas fa-retweet"></i>
+                    </div>
+                    <h6 className="text-xl font-semibold">{temp}°F </h6>
+                    <p className="mt-2 mb-4 text-blueGray-500">
+                      High for today: {max}°F <br />
+                      Low for today: {min}°F
                     </p>
                   </div>
                 </div>
