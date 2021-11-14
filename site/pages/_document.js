@@ -14,6 +14,10 @@ class MyDocument extends Document {
             sizes="76x76"
             href="/img/brand/apple-icon.png"
           />
+          <script
+            src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyBQyS8QpRZdCr31a6EjLgFTbgCAIrj0N6k&callback=initMap&libraries=&v=weekly`}
+            async
+          ></script>
         </Head>
         <body className="text-blueGray-700 antialiased">
           <div id="page-transition"></div>

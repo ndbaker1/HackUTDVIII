@@ -1,6 +1,7 @@
 import React from "react";
 
 // components
+import OpenWeatherMap from 'openweathermap-ts';
 
 import CardLineChart from "components/Cards/CardLineChart.js";
 import CardBarChart from "components/Cards/CardBarChart.js";
@@ -12,8 +13,17 @@ import CardSocialTraffic from "components/Cards/CardSocialTraffic.js";
 import Admin from "layouts/Admin.js";
 
 export default function Dashboard() {
+  const openWeather = new OpenWeatherMap({
+    apiKey: 'cef2ac7ef2445f3bbfcf45109582bbce'
+  });
+  openWeather
+  .getCurrentWeatherByCityName({
+    cityName: 'Richardson'
+  })
+  .then((weather) => console.log('Weather object is', weather));
   return (
     <>
+    
       <div className="flex flex-wrap">
         <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
           <CardLineChart />
